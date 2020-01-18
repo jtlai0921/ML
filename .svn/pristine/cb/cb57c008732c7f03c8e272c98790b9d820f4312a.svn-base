@@ -1,0 +1,7 @@
+id,blood,value,percent,answer,size,temperatrue
+STU001,B,4.251,0.1,yes,small,2678
+STU002,A,,0.2,no,large,70
+STU003,O,,,yes,medium,80
+STU004,A,5.348,,yes,large,-200
+STU005,B,4.57,,yes,large,66
+STU006,AB,6.18,0.3,no,medium,50

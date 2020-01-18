@@ -1,0 +1,4676 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# 資料處理使用pandas"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pandas as pd\n",
+    "import numpy as np"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## read_csv"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 92,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#list header name & index name\n",
+    "df=pd.read_csv('data.csv', index_col = None)\n",
+    "df\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "(6, 7)\n",
+      "Index(['id', 'blood', 'value', 'percent', 'answer', 'size', 'temperatrue'], dtype='object')\n",
+      "RangeIndex(start=0, stop=6, step=1)\n",
+      "6\n"
+     ]
+    }
+   ],
+   "source": [
+    "#list header name & index name\n",
+    "print(df.shape)\n",
+    "print(df.columns)\n",
+    "print(df.index)\n",
+    "print(len(df.index))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>blood</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>B</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>A</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>O</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  blood  temperatrue\n",
+       "0     B         2678\n",
+       "1     A           70\n",
+       "2     O           80"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[0:3][['blood','temperatrue']]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## select rows with specific IDs"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df_filter = df['id'].isin(['STU001','STU006'])\n",
+    "df[df_filter]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## drop column "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "df=df.drop(columns=['blood', 'value'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## check data type of columns"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id              object\n",
+       "blood           object\n",
+       "value          float64\n",
+       "percent        float64\n",
+       "answer          object\n",
+       "size            object\n",
+       "temperatrue      int64\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "object     4\n",
+       "float64    2\n",
+       "int64      1\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.dtypes.value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 36,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 36,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   value  percent  temperatrue\n",
+       "0  4.251      0.1         2678\n",
+       "1    NaN      0.2           70\n",
+       "2    NaN      NaN           80\n",
+       "3  5.348      NaN         -200\n",
+       "4  4.570      NaN           66\n",
+       "5  6.180      0.3           50"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.select_dtypes(include=['float64', 'int64'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 資料統計分析"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "5.08725"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "mean=df['value'].mean()\n",
+    "mean"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "value            5.087250\n",
+       "percent          0.200000\n",
+       "size             2.333333\n",
+       "temperatrue    457.333333\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.mean(axis=0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    670.837750\n",
+       "1     19.571813\n",
+       "2     29.029083\n",
+       "3    -63.884000\n",
+       "4     24.523333\n",
+       "5     14.620000\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.mean(axis=1)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {
+    "scrolled": false
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.6676757820978679"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['value'].std()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "value             0.667676\n",
+       "percent           0.100000\n",
+       "size              0.816497\n",
+       "temperatrue    1093.152993\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 30,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.std(axis=0)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>count</th>\n",
+       "      <td>6.000000</td>\n",
+       "      <td>3.00</td>\n",
+       "      <td>6.000000</td>\n",
+       "      <td>6.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>mean</th>\n",
+       "      <td>5.087250</td>\n",
+       "      <td>0.20</td>\n",
+       "      <td>2.333333</td>\n",
+       "      <td>457.333333</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>std</th>\n",
+       "      <td>0.667676</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>0.816497</td>\n",
+       "      <td>1093.152993</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>min</th>\n",
+       "      <td>4.251000</td>\n",
+       "      <td>0.10</td>\n",
+       "      <td>1.000000</td>\n",
+       "      <td>-200.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>25%</th>\n",
+       "      <td>4.699313</td>\n",
+       "      <td>0.15</td>\n",
+       "      <td>2.000000</td>\n",
+       "      <td>54.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>50%</th>\n",
+       "      <td>5.087250</td>\n",
+       "      <td>0.20</td>\n",
+       "      <td>2.500000</td>\n",
+       "      <td>68.000000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>75%</th>\n",
+       "      <td>5.282813</td>\n",
+       "      <td>0.25</td>\n",
+       "      <td>3.000000</td>\n",
+       "      <td>77.500000</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>max</th>\n",
+       "      <td>6.180000</td>\n",
+       "      <td>0.30</td>\n",
+       "      <td>3.000000</td>\n",
+       "      <td>2678.000000</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "          value  percent      size  temperatrue\n",
+       "count  6.000000     3.00  6.000000     6.000000\n",
+       "mean   5.087250     0.20  2.333333   457.333333\n",
+       "std    0.667676     0.10  0.816497  1093.152993\n",
+       "min    4.251000     0.10  1.000000  -200.000000\n",
+       "25%    4.699313     0.15  2.000000    54.000000\n",
+       "50%    5.087250     0.20  2.500000    68.000000\n",
+       "75%    5.282813     0.25  3.000000    77.500000\n",
+       "max    6.180000     0.30  3.000000  2678.000000"
+      ]
+     },
+     "execution_count": 25,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.describe()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Handle missing values"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 38,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>no</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "      <th>new</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>True</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "      <td>False</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "      no  blood  value  percent  answer   size  temperatrue    new\n",
+       "0  False  False  False    False   False  False        False  False\n",
+       "1  False  False   True    False   False  False        False  False\n",
+       "2  False  False   True     True   False  False        False  False\n",
+       "3  False  False  False     True   False  False        False  False\n",
+       "4  False  False  False     True   False  False        False  False\n",
+       "5  False  False  False    False   False  False        False  False"
+      ]
+     },
+     "execution_count": 38,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "2"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['value'].isnull().sum()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id             0\n",
+       "blood          0\n",
+       "value          2\n",
+       "percent        3\n",
+       "answer         0\n",
+       "size           0\n",
+       "temperatrue    0\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.isnull().sum(axis=0)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "###  刪除有缺值的列"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 52,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 52,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 54,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 54,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#刪除有缺值的列\n",
+    "df.dropna(axis=0) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood answer    size  temperatrue\n",
+       "0  STU001     B    yes   small         2678\n",
+       "1  STU002     A     no   large           70\n",
+       "2  STU003     O    yes  medium           80\n",
+       "3  STU004     A    yes   large         -200\n",
+       "4  STU005     B    yes   large           66\n",
+       "5  STU006    AB     no  medium           50"
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#刪除有缺值的欄\n",
+    "df.dropna(axis=1) "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 使用指定值填充缺失值"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.25100</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>1</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.08725</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>3</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>5.08725</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>2</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.34800</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>3</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.57000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>3</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.18000</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>2</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood    value  percent answer  size  temperatrue\n",
+       "0  STU001     B  4.25100      0.1    yes     1         2678\n",
+       "1  STU002     A  5.08725      0.2     no     3           70\n",
+       "2  STU003     O  5.08725      NaN    yes     2           80\n",
+       "3  STU004     A  5.34800      NaN    yes     3         -200\n",
+       "4  STU005     B  4.57000      NaN    yes     3           66\n",
+       "5  STU006    AB  6.18000      0.3     no     2           50"
+      ]
+     },
+     "execution_count": 22,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['value'].fillna(mean, inplace=True) \n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##  刪除重覆的列\n",
+    "    DataFrame.drop_duplicates(subset=None, keep='first', inplace=False)\n",
+    "https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.drop_duplicates.html"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 44,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 44,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#資料內容完全相同时才去除\n",
+    "df.drop_duplicates()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 45,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 45,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#針對資料的特定欄位相同時則劀除\n",
+    "df.drop_duplicates(['blood'],keep='first', inplace=False)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 46,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 46,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.drop_duplicates(['blood','size'],keep='first', inplace=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## data transformations\n",
+    "    apply()\n",
+    "    map()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 101,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 101,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df=pd.read_csv('data.csv', index_col = None)\n",
+    "\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 55,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1.0</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0.0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   id  blood  value  percent  answer  size  temperatrue\n",
+       "0   1      1    1.0      1.0       1     1            1\n",
+       "1   0      0    0.0      0.0       0     0            0\n",
+       "2   1      1    1.0      1.0       1     1            1\n",
+       "3   1      1    1.0      1.0       1     1            1\n",
+       "4   1      1    1.0      1.0       1     1            1\n",
+       "5   0      0    0.0      0.0       0     0            0"
+      ]
+     },
+     "execution_count": 55,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[df['answer']=='yes']=1\n",
+    "df[df['answer']=='no']=0\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "level_map = {'small':1, 'medium':2, 'large':3}\n",
+    "df['size']=df['size'].map(level_map)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 60,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0     small\n",
+       "1     large\n",
+       "2    medium\n",
+       "3     large\n",
+       "4     large\n",
+       "5    medium\n",
+       "Name: size, dtype: object"
+      ]
+     },
+     "execution_count": 60,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['size']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 61,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "      <th>new</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue  new\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678    1\n",
+       "1  STU002     A    NaN      0.2     no   large           70    3\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80    2\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200    3\n",
+       "4  STU005     B  4.570      NaN    yes   large           66    3"
+      ]
+     },
+     "execution_count": 61,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "def rule(x):\n",
+    "    if x == 'small' :\n",
+    "         return 1\n",
+    "    elif x == 'medium' :\n",
+    "        return 2\n",
+    "    else :\n",
+    "         return 3\n",
+    "        \n",
+    "df['new'] = df.apply(lambda x: rule(x['size']), axis = 1)\n",
+    "df.head()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    4.3\n",
+       "1    NaN\n",
+       "2    NaN\n",
+       "3    5.3\n",
+       "4    4.6\n",
+       "5    6.2\n",
+       "dtype: float64"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.apply(lambda x: round(x['value'], 1), axis = 1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 取片段\n",
+    "    df.iloc[row,column]\n",
+    "    df.iloc[:,:]\n",
+    "    df.iloc[[],[]]\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 89,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "4.251"
+      ]
+     },
+     "execution_count": 89,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.iloc[0,2]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 88,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   percent answer\n",
+       "0      0.1    yes\n",
+       "1      0.2     no\n",
+       "2      NaN    yes\n",
+       "3      NaN    yes"
+      ]
+     },
+     "execution_count": 88,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.iloc[0:4,3:5]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 87,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "  blood  value\n",
+       "0     B  4.251\n",
+       "3     A  5.348"
+      ]
+     },
+     "execution_count": 87,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.iloc[[0,3],[1,2]]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 92,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.25100</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.08725</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.34800</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.57000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.18000</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood    value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.25100      0.1    yes   small         2678\n",
+       "1  STU002     A  5.08725      0.2     no   large           70\n",
+       "2  STU003     O      NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.34800      NaN    yes   large         -200\n",
+       "4  STU005     B  4.57000      NaN    yes   large           66\n",
+       "5  STU006    AB  6.18000      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 92,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.iloc[1,2]=m\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 94,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.25100</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>0.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.08725</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.34800</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.57000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.18000</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood    value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.25100      0.1    yes   small          0.0\n",
+       "1  STU002     A  5.08725      0.2     no   large         70.0\n",
+       "2  STU003     O      NaN      NaN    yes  medium         80.0\n",
+       "3  STU004     A  5.34800      NaN    yes   large       -200.0\n",
+       "4  STU005     B  4.57000      NaN    yes   large         66.0\n",
+       "5  STU006    AB  6.18000      0.3     no  medium         50.0"
+      ]
+     },
+     "execution_count": 94,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.iloc[0,6]=0\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "##  check value distributions\n",
+    "\n",
+    "https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.value_counts.html"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 95,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    yes\n",
+       "1     no\n",
+       "2    yes\n",
+       "3    yes\n",
+       "4    yes\n",
+       "5     no\n",
+       "Name: answer, dtype: object"
+      ]
+     },
+     "execution_count": 95,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['answer']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "yes    4\n",
+       "no     2\n",
+       "Name: answer, dtype: int64"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['answer'].value_counts()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "yes    0.666667\n",
+       "no     0.333333\n",
+       "Name: answer, dtype: float64"
+      ]
+     },
+     "execution_count": 26,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# to check the frequency instead of counts.\n",
+    "df['answer'].value_counts(normalize = True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 69,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "yes    4\n",
+       "no     2\n",
+       "Name: answer, dtype: int64"
+      ]
+     },
+     "execution_count": 69,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['answer'].value_counts().sort_index()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 97,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "5.08725    1\n",
+       "5.34800    1\n",
+       "6.18000    1\n",
+       "4.57000    1\n",
+       "NaN        1\n",
+       "4.25100    1\n",
+       "Name: value, dtype: int64"
+      ]
+     },
+     "execution_count": 97,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "#to include missing values in the stats.\n",
+    "df['value'].value_counts(dropna = False) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 34,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(-200.653, 126.0]    5\n",
+       "(126.0, 452.0]       1\n",
+       "Name: temperatrue, dtype: int64"
+      ]
+     },
+     "execution_count": 34,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['temperatrue'].value_counts(bins = 2)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 100,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.08725</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.57000</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.18000</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.25100</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>0.0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.34800</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200.0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood    value  percent answer    size  temperatrue\n",
+       "2  STU003     O      NaN      NaN    yes  medium         80.0\n",
+       "1  STU002     A  5.08725      0.2     no   large         70.0\n",
+       "4  STU005     B  4.57000      NaN    yes   large         66.0\n",
+       "5  STU006    AB  6.18000      0.3     no  medium         50.0\n",
+       "0  STU001     B  4.25100      0.1    yes   small          0.0\n",
+       "3  STU004     A  5.34800      NaN    yes   large       -200.0"
+      ]
+     },
+     "execution_count": 100,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.sort_values(by='temperatrue', ascending=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Remove Outlier\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 102,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 102,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 104,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "<matplotlib.axes._subplots.AxesSubplot at 0x20ef9a02908>"
+      ]
+     },
+     "execution_count": 104,
+     "metadata": {},
+     "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 432x288 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "import seaborn as sns\n",
+    "import matplotlib.pyplot as plt\n",
+    "sns.boxplot(x=df['temperatrue'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 105,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "image/png": "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\n",
+      "text/plain": [
+       "<Figure size 360x360 with 1 Axes>"
+      ]
+     },
+     "metadata": {
+      "needs_background": "light"
+     },
+     "output_type": "display_data"
+    }
+   ],
+   "source": [
+    "fig, ax = plt.subplots(figsize=(5,5))\n",
+    "ax.scatter(df['id'], df['temperatrue'])\n",
+    "ax.set_xlabel('id')\n",
+    "ax.set_ylabel('temperatrue')\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Z-score"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 115,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[2.22532296 0.38814549 0.37812453 0.65871163 0.39215388 0.40818743]\n"
+     ]
+    }
+   ],
+   "source": [
+    "from scipy import stats\n",
+    "import numpy as np\n",
+    "z = np.abs(stats.zscore(df['temperatrue']))\n",
+    "print(z)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 113,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "4"
+      ]
+     },
+     "execution_count": 113,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "a=(3,4,)\n",
+    "a[1]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 118,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "(array([0, 3], dtype=int64),)"
+      ]
+     },
+     "execution_count": 118,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.where(z > 0.5)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 117,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([0, 3], dtype=int64)"
+      ]
+     },
+     "execution_count": 117,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "np.where(z > 0.5)[0]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 122,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0    2678\n",
+       "3    -200\n",
+       "Name: temperatrue, dtype: int64"
+      ]
+     },
+     "execution_count": 122,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['temperatrue'][np.where(z > 0.5)[0]]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 124,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[0]\n",
+      "0    2678\n",
+      "Name: temperatrue, dtype: int64\n"
+     ]
+    }
+   ],
+   "source": [
+    "threshold = 2\n",
+    "print(np.where(z > threshold)[0])\n",
+    "\n",
+    "print(df['temperatrue'][np.where(z > threshold)[0]])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 128,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([2.22532296, 0.38814549, 0.37812453, 0.65871163, 0.39215388,\n",
+       "       0.40818743])"
+      ]
+     },
+     "execution_count": 128,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 129,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "array([False,  True,  True, False,  True,  True])"
+      ]
+     },
+     "execution_count": 129,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "z < 0.5"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 131,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.57</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.18</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "4  STU005     B   4.57      NaN    yes   large           66\n",
+       "5  STU006    AB   6.18      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 131,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "newdf = df[(z < 0.5)]\n",
+    "newdf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 135,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "66.5"
+      ]
+     },
+     "execution_count": 135,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "newdf['temperatrue'].mean()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 136,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "12.476644848141934"
+      ]
+     },
+     "execution_count": 136,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "newdf['temperatrue'].std()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Percentile groups"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[68.0, 80.0, 359.0]"
+      ]
+     },
+     "execution_count": 32,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "\n",
+    "cut_points = [np.percentile(df['temperatrue'], i) for i in [50, 80, 95]]\n",
+    "cut_points"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0     52\n",
+       "1     70\n",
+       "2     80\n",
+       "3   -200\n",
+       "4     66\n",
+       "5    452\n",
+       "Name: temperatrue, dtype: int64"
+      ]
+     },
+     "execution_count": 33,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['temperatrue']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 42,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "      <th>group</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>52</td>\n",
+       "      <td>4</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "      <td>3</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "      <td>4</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "      <td>4</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>452</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue  group\n",
+       "0  STU001     B  4.251      0.1    yes   small           52      4\n",
+       "1  STU002     A    NaN      0.2     no   large           70      3\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80      2\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200      4\n",
+       "4  STU005     B  4.570      NaN    yes   large           66      4\n",
+       "5  STU006    AB  6.180      0.3     no  medium          452      1"
+      ]
+     },
+     "execution_count": 42,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df['group'] = 1\n",
+    "for i in range(3):\n",
+    "    df['group'] = df['group'] + (df['temperatrue'] < cut_points[i])\n",
+    "df"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## to_csv"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "      <th>group</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>52</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "      <td>2</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue  group\n",
+       "0  STU001     B  4.251      0.1    yes   small           52      2\n",
+       "1  STU002     A    NaN      0.2     no   large           70      1\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80      1\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200      2\n",
+       "4  STU005     B  4.570      NaN    yes   large           66      2"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df[:5]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "id,blood,value,percent,answer,size,temperatrue\r\n",
+      "STU001,B,4.251,0.1,yes,small,2678\r\n",
+      "STU002,A,,0.2,no,large,70\r\n",
+      "STU003,O,,,yes,medium,80\r\n",
+      "STU004,A,5.348,,yes,large,-200\r\n",
+      "STU005,B,4.57,,yes,large,66\r\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "#卬出前5筆寫入到.csv檔的伂內容\n",
+    "print(df[:5].to_csv(index=False))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 93,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "##全部寫入.csv檔\n",
+    "df.to_csv('data_1.csv', index=False)\n",
+    "df.to_csv('data_2.csv', index=False)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Handle Large Data\n",
+    "\n",
+    "    1.) 減少Dataframe 儲存空間\n",
+    "    3.) 資料來自個.csv \n",
+    "    2.) 大的.csv檔的處理\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "https://www.itread01.com/content/1548716068.html"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 116,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "1  STU002     A    NaN      0.2     no   large           70\n",
+       "2  STU003     O    NaN      NaN    yes  medium           80\n",
+       "3  STU004     A  5.348      NaN    yes   large         -200\n",
+       "4  STU005     B  4.570      NaN    yes   large           66\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 116,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "pd.read_csv('data_1.csv', index_col = None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 減少Dataframe 儲存空間"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 66,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id              object\n",
+       "blood           object\n",
+       "value          float64\n",
+       "percent        float64\n",
+       "answer          object\n",
+       "size            object\n",
+       "temperatrue      int64\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 66,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 67,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index          80\n",
+       "id             48\n",
+       "blood          48\n",
+       "value          48\n",
+       "percent        48\n",
+       "answer         48\n",
+       "size           48\n",
+       "temperatrue    48\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 67,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.memory_usage()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 110,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "id              object\n",
+       "blood           object\n",
+       "value          float32\n",
+       "percent        float32\n",
+       "answer          object\n",
+       "size            object\n",
+       "temperatrue      int32\n",
+       "dtype: object"
+      ]
+     },
+     "execution_count": 110,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "# Change the dtypes (int64 -> int32)\n",
+    "df['temperatrue'] = df['temperatrue'].astype('int32')\n",
+    "# Change the dtypes (float64 -> float32)\n",
+    "df[['value','percent']] = df[['value','percent']] .astype('float32')\n",
+    "df.dtypes"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 71,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "Index          80\n",
+       "id             48\n",
+       "blood          48\n",
+       "value          24\n",
+       "percent        24\n",
+       "answer         48\n",
+       "size           48\n",
+       "temperatrue    24\n",
+       "dtype: int64"
+      ]
+     },
+     "execution_count": 71,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "df.memory_usage()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 資料來自個.csv "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 123,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "open: data_1.csv\n",
+      "open: data_2.csv\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>STU002</td>\n",
+       "      <td>A</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>0.2</td>\n",
+       "      <td>no</td>\n",
+       "      <td>large</td>\n",
+       "      <td>70</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>STU003</td>\n",
+       "      <td>O</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>80</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>STU004</td>\n",
+       "      <td>A</td>\n",
+       "      <td>5.348</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>-200</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>10</th>\n",
+       "      <td>STU005</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.570</td>\n",
+       "      <td>NaN</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>large</td>\n",
+       "      <td>66</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>11</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "        id blood  value  percent answer    size  temperatrue\n",
+       "0   STU001     B  4.251      0.1    yes   small         2678\n",
+       "1   STU002     A    NaN      0.2     no   large           70\n",
+       "2   STU003     O    NaN      NaN    yes  medium           80\n",
+       "3   STU004     A  5.348      NaN    yes   large         -200\n",
+       "4   STU005     B  4.570      NaN    yes   large           66\n",
+       "5   STU006    AB  6.180      0.3     no  medium           50\n",
+       "6   STU001     B  4.251      0.1    yes   small         2678\n",
+       "7   STU002     A    NaN      0.2     no   large           70\n",
+       "8   STU003     O    NaN      NaN    yes  medium           80\n",
+       "9   STU004     A  5.348      NaN    yes   large         -200\n",
+       "10  STU005     B  4.570      NaN    yes   large           66\n",
+       "11  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 123,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "def data_preprocessing(chunk):\n",
+    "    chunk = chunk.dropna()    # 刪除有空值的列\n",
+    "    chunk = chunk.drop_duplicates() # 刪除重複資料\n",
+    "    chunk['temperatrue']=chunk['temperatrue'].astype('int32')\n",
+    "    return chunk\n",
+    "\n",
+    "\n",
+    "newdf = pd.DataFrame() #empty dataframe\n",
+    "\n",
+    "for i in range(2):\n",
+    "    file='data_'+str(i+1)+'.csv'\n",
+    "    print('open: '+file)\n",
+    "    df_t=pd.read_csv(file, index_col = None)\n",
+    "    #do data processing\n",
+    "    #df_t=data_preprocessing(df_t) \n",
+    "    newdf=pd.concat([newdf,df_t],ignore_index=True)\n",
+    "    \n",
+    "    \n",
+    "newdf"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 122,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "id              object\n",
+      "blood           object\n",
+      "value          float64\n",
+      "percent        float64\n",
+      "answer          object\n",
+      "size            object\n",
+      "temperatrue      int32\n",
+      "dtype: object\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(newdf.dtypes)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### 大的.csv檔的處理"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 102,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Iteration is stopped.\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>id</th>\n",
+       "      <th>blood</th>\n",
+       "      <th>value</th>\n",
+       "      <th>percent</th>\n",
+       "      <th>answer</th>\n",
+       "      <th>size</th>\n",
+       "      <th>temperatrue</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>STU001</td>\n",
+       "      <td>B</td>\n",
+       "      <td>4.251</td>\n",
+       "      <td>0.1</td>\n",
+       "      <td>yes</td>\n",
+       "      <td>small</td>\n",
+       "      <td>2678</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>STU006</td>\n",
+       "      <td>AB</td>\n",
+       "      <td>6.180</td>\n",
+       "      <td>0.3</td>\n",
+       "      <td>no</td>\n",
+       "      <td>medium</td>\n",
+       "      <td>50</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "       id blood  value  percent answer    size  temperatrue\n",
+       "0  STU001     B  4.251      0.1    yes   small         2678\n",
+       "5  STU006    AB  6.180      0.3     no  medium           50"
+      ]
+     },
+     "execution_count": 102,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data = pd.read_csv('data_1.csv',index_col = None,iterator=True) #,sep=';'\n",
+    "loop = True\n",
+    "chunksize = 2\n",
+    "chunk_list = []\n",
+    "\n",
+    "\n",
+    "\n",
+    "\n",
+    "while loop:\n",
+    "    try:\n",
+    "        chunk = data.get_chunk(chunksize)\n",
+    "        data_preprocessing(chunk)\n",
+    "        chunk_list.append(chunk)\n",
+    "    except StopIteration:\n",
+    "        loop = False\n",
+    "        print(\"Iteration is stopped.\")\n",
+    "\n",
+    "df = pd.concat(chunk_list)\n",
+    "\n",
+    "df = df.dropna()\n",
+    "df = df.drop_duplicates()\n",
+    "df"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.8"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
